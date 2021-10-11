@@ -7,7 +7,7 @@ ENV TZ=Australia/Brisbane
 
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
-    apt-get install -y cmake libjpeg8-dev g++ unzip wget git ffmpeg \
+apt-get install -y cmake libjpeg8-dev g++ unzip wget git ffmpeg \
         python2 virtualenv python3-dev
 
 RUN cd /tmp/ && \
@@ -54,7 +54,9 @@ https://github.com/fraschetti/Octoslack/archive/master.zip \
 https://github.com/MoonshineSG/OctoPrint-MultiColors/archive/master.zip \
 https://github.com/OllisGit/OctoPrint-PrintJobHistory/releases/latest/download/master.zip \
 https://github.com/Kragrathea/OctoPrint-PrettyGCode/archive/master.zip
-
+https://github.com/imrahil/OctoPrint-PrintHistory/archive/master.zip \
+https://github.com/Kragrathea/OctoPrint-PrettyGCode/archive/master.zip \
+https://github.com/jneilliii/OctoPrint-Tasmota/archive/master.zip
 
 VOLUME /home/octoprint/.octoprint
 
@@ -76,14 +78,14 @@ USER octoprint
 
 WORKDIR /home/octoprint
 
-RUN git clone https://github.com/KevinOConnor/klipper
+RUN git clone https://github.com/Desuuuu/klipper && git clone https://github.com/Desuuuu/DGUS-reloaded-Klipper-config 
 
 # Update the install script for Ubuntu 20
 RUN sed -i 's/python-virtualenv //' ./klipper/scripts/install-ubuntu-18.04.sh
 
 RUN ./klipper/scripts/install-ubuntu-18.04.sh
 
-RUN cp klipper/config/printer-anet-a8-2017.cfg /home/octoprint/printer.cfg
+RUN cp ./DGUS-reloaded-Klipper-config/examples/printer-creality-cr10spro.cfg /home/octoprint/printer.cfg
 
 USER root
 

@@ -14,16 +14,10 @@ Once the container is built (the usual `docker build . -t okmd`), I use the foll
 ```
 docker kill octoprint2
 docker rm octoprint2
-docker run --name octoprint2 -d -v /etc/localtime:/etc/localtime:ro -v /home/user/Documents/octoprint-config:/home/octoprint/.octoprint \
-    --device /dev/ttyUSB0:/dev/ttyUSB0 \
-    --device /dev/video0:/dev/video0 \
-    --device /dev/video1:/dev/video1 \
-    --device /dev/video2:/dev/video2 \
-    -p 5000:5000 -p 8080:8080 -p 8081:8081 -p 8082:8082\
-    -e "MJPG=input_uvc.so -r HD -d /dev/video2" \
-    -e "MJPG1=input_uvc.so -r HD -d /dev/video0" -e "MJPG_PORT1=8081" \
-    -e "MJPG2=input_uvc.so -r HD -d /dev/video1" -e "MJPG_PORT2=8082" \
-    okmd
+docker run --name octoprint2 -d -v /etc/localtime:/etc/localtime:ro -v /home/ubuntu/octoprint-config:/home/octoprint/.octoprint \
+    --device /dev/serial/by-id/usb-FTDI_FT232R_USB_UART_AM00OW9S-if00-port0:/dev/ttyUSB0 \
+    -p 5000:5000 -p 8080:8080 -p 8081:8081 -p 8082:8082 \
+    octoprint-klipper
 ```
 
 Your Klipper `printer.cfg` should be kept in the OctoPrint config directory (this is where it looks for it at startup).
