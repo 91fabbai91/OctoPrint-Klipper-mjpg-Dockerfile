@@ -3,7 +3,7 @@ EXPOSE 8080
 
 
 # Override this for your location
-ENV TZ=Australia/Brisbane
+ENV TZ=Europe/Berlin
 
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
